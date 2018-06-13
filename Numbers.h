@@ -44,53 +44,83 @@ void make(int n,vec &A){
 		ctr++;
 	}
 }
+void displa(vec &A)
+{
+    unsigned int i;
+    for(i=0;i<A.a.size();i++)
+        cout<<A.a[i];
+}
 void sub(vec &A , vec &B)       ///A>B   and A=A-B
 {
     int i=0;
-    if(A.a.size()!=1){
-    while(1){
-        if(A.a[i]==0)
-            i++;
-        else
-            break;
-    }
-    A.a.erase(A.a.begin(),A.a.begin()+i);
-    }
-    i=0;
-    if(B.a.size()!=1){
-    while(1){
-        if(B.a[i]==0)
-            i++;
-        else
-            break;
-    }
-    B.a.erase(B.a.begin(),B.a.begin()+i);
-    }
+    // if(A.a.size()!=1){
+    //     while(1){
+    //         if(A.a[i]==0)
+    //             i++;
+    //         else
+    //             break;
+    //     }
+    //     if(i!=A.a.size())
+    //         A.a.erase(A.a.begin(),A.a.begin()+i);
+    //     else
+    //         A.a.resize(1,0);
+    // }
+    // i=0;
+    // if(B.a.size()!=1){
+    //     while(1){
+    //         if(B.a[i]==0)
+    //             i++;
+    //         else
+    //             break;
+    //     }
+    //     if(i!=B.a.size())
+    //         B.a.erase(B.a.begin(),B.a.begin()+i);
+    //     else
+    //         B.a.resize(1,0);       
+    // }
+    // i=A.a.size()-1;
+    // int j = B.a.size()-1;
+    // if(j>i){
+    //     A.a[0]=-1;
+    //     return;
+    // }
+    // if(i==j){
+    //     while(i>=0 && j>=0 ){
+    //         if(B.a[j]>A.a[i]){
+    //             A.a[0]=-1;
+    //             return;
+    //         }
+    //         if(A.a[i]>B.a[j])
+    //             break;
+    //         else
+    //             i--,j--;
+    //     }
+    // }
     int s1 = A.a.size()-1;
     int s2 = B.a.size() -1;
     ///To check for -ve results..
-    if(s2>s1){
-        A.a[0]=-1;
-        return;
-    }
-    else if(s1==s2){
-        int c=0;
-        bool rval = 0;
-        while(c<=s1){
-            if(A.a[c]==B.a[c])
-                c++;
-            else if(A.a[c]<B.a[c]){
-                rval=1;
-                break;
-            }
-            else
-                break;
-        }
-        if(rval){
-            A.a[0]=-1;
-            return ;
-        }
-    }
+    // if(s2>s1){
+    //     A.a[0]=-1;
+    //     return;
+    // }
+    // else if(s1==s2){
+    //     int c=0;
+    //     bool rval = 0;
+    //     while(c<=s1){
+    //         if(A.a[c]==B.a[c])
+    //             c++;
+    //         else if(A.a[c]<B.a[c]){
+    //             rval=1;
+    //             break;
+    //         }
+    //         else
+    //             break;
+    //     }
+    //     if(rval){
+    //         A.a[0]=-1;
+    //         return ;
+    //     }
+    // }
     while((s1>=0)&&(s2>=0)){
         if(A.a[s1]>=B.a[s2])
             A.a[s1]-=B.a[s2];
@@ -123,6 +153,49 @@ void sub(vec &A , vec &B)       ///A>B   and A=A-B
             A.a.resize(1,0);
         }
     }
+bool larger(vec &A , vec &B) /// A>B
+{
+    int i=0;
+    if(A.a.size()!=1){
+        while(i<A.a.size()){
+            if(A.a[i]==0)
+                i++;
+            else
+                break;
+        }
+        if(i!=A.a.size())
+            A.a.erase(A.a.begin(),A.a.begin()+i);
+        else
+            A.a.resize(1,0);
+        }
+    i=0;
+    if(B.a.size()!=1){
+        while(i<B.a.size()){
+            if(B.a[i]==0)
+                i++;
+            else
+                break;
+        }
+        if(i!=B.a.size())
+            B.a.erase(B.a.begin(),B.a.begin()+i);
+        else
+            B.a.resize(1,0);
+        }
+    i=A.a.size();
+    int j=B.a.size();
+    if(i>j)
+        return 1;
+    if(j>i)
+        return 0;
+    i=0;
+    while(i<A.a.size()){
+        if(A.a[i]>B.a[i])
+            return 1;
+        if(B.a[i]>A.a[i])
+            return 0;
+        i++;
+    }
+}
 void div(vec &A , vec &B , vec &Q , vec &R)  /// Q = A/B R=A%B
 {
     if(A.a.size()<B.a.size()){
@@ -138,31 +211,53 @@ void div(vec &A , vec &B , vec &Q , vec &R)  /// Q = A/B R=A%B
             break;
         R.a.push_back(A.a[i++]);
         Copy=R;
-        if(R.a.size()<B.a.size()){
+        if(larger(B,R)){
             Q.a.push_back(0);
             continue;
         }
         sub(R,B);
-        if(R.a[0]<0){
-            Q.a.push_back(0);
-            R=Copy;
-            continue;
-        }
-        else{
-            Copy=R;
-            ctr=1;
-        }
+        // if(R.a[0]<0){
+        //     Q.a.push_back(0);
+        //     R=Copy;
+        //     continue;
+        // // }
+        //     if((R.a.size()==1)&&(R.a[0]==0)){
+        //         R.a.clear();
+        //         Copy=R;
+        //         Q.a.push_back(1);
+        //         continue;
+        //     }
+        //     else{
+        Copy=R;
+        ctr=1;
         while(1){
-            sub(R,B);
-            ctr++;
-            if(R.a[0]<0){
-                R=Copy;
-                Q.a.push_back(ctr-1);
+            if(larger(B,R)){
+                Q.a.push_back(ctr);
                 ctr=0;
+                R=Copy;
                 break;
             }
-            else
-                Copy=R;
+            sub(R,B);
+            Copy=R;
+            ctr++;
+            // if(R.a[0]<0){
+            //     R=Copy;
+            //     Q.a.push_back(ctr-1);
+            //     ctr=0;
+            //     break;
+            // }
+            // else{
+            //     if((R.a.size()==1)&&(R.a[0]==0)){
+            //         R.a.clear();
+            //         Copy=R;
+            //         Q.a.push_back(ctr);
+            //         break;
+            //     }
+            //     else{
+            //         Copy=R;
+            //         ctr=1;
+            //     }
+            // }
         }
     }
     i=0;
@@ -263,12 +358,6 @@ void multiply(vec &A, vec &B , vec &C) // Multiplies A and B and stores it in C
 		C.a[i]=C.a[i+1];
 		C.a.pop_back();
 	}
-}
-void display(vec &A)
-{
-    unsigned int i;
-    for(i=0;i<A.a.size();i++)
-        cout<<A.a[i];
 }
 void divby2( vec &a){
     int li=a.a.size()-1;
