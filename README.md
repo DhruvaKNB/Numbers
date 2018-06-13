@@ -6,12 +6,11 @@ A memory efficient implementation of BigInteger for C++ , along with a Random cl
 
 Usage:
 1. Initialisation:
-	a. Int n;
-	b. Int n(-4356); /// or any other value
-	c. Int n = 32875 /// or any other value
-	d. Int c = 43463;
-          	Int f = c;
-2. All operators including logical , relational , increment , decrement along with simple arithmetic operators are available , the same as with a normal integer.
+	## a. Int n;
+	## b. Int n(-4356); /// or any other value
+	## c. Int n = 32875 /// or any other value
+	## d. Int c = 43463;Int f = c;
+2. All operators including logical , relational , increment , decrement along with simple arithmetic and shift operators for Int,Int as well as Int,int pairs are available , the same as with a normal integer.
 3. cin and cout have been overloaded so the numbers can be input from the keyboard too.
 4. The function factorial returns an Int which contains the factorial of the number given as argument to it.
 5. To use the Random function first an object of the Random class must be created. The argument passed to the constructor only determines the time taken for instantiation. A small value like 10,20,5 would not be suitable for the function to perform well and a large value like 2500 , 1500 would not be suitable either. So ideally any value between 100 to 1200 should be chosen for the same. 

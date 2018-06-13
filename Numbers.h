@@ -92,7 +92,7 @@ void sub(vec &A , vec &B)       ///A>B   and A=A-B
         }
     }
     while((s1>=0)&&(s2>=0)){
-        if(A.a[s1]>=B.a[s2]) 
+        if(A.a[s1]>=B.a[s2])
             A.a[s1]-=B.a[s2];
         else{
             A.a[s1]=10+A.a[s1]-B.a[s2];
@@ -374,13 +374,14 @@ class Int{
     pair < bool , bool > ith_bit(int t){
         pair < bool , bool > rval;
         rval.first=0;
+        rval.second=0;
         if(t>(bits-1)){
             return rval;
         }
         rval.first=1;
         int n = num[(t>>3)];
         int shift = t%8;
-        rval.second = ( n & (1<<shift) ) >> shift ; 
+        rval.second = ( n & (1<<shift) ) >> shift ;
         return rval;
     }
     int ith_digit(int i){
@@ -398,7 +399,7 @@ class Int{
             li--;
         g.erase(g.begin()+li+1,g.end());
         if(i>(g.size()-1))
-            return -1;
+            return 0;
         else
             return g[i];
     }
@@ -520,7 +521,7 @@ class Int{
             int st = c.size()-1;
             while((c[st]==0)&&(st>=0))
                 st--;
-            c.erase(c.begin()+1+st,c.end());        
+            c.erase(c.begin()+1+st,c.end());
         }
         cc.bits = c.size();
         cc.sign = sign;
@@ -919,7 +920,7 @@ class Int{
         make_num(lhs,dd);
         *this = dd;
         return *this;
-    }    
+    }
     Int operator ! (){
         vector < bool > lhs = make_binary(*this);
         int size = lhs.size();
@@ -950,7 +951,7 @@ class Int{
         }
         ///s1 is -ve s2 is +ve
         else if ((s1)&&(!s2)){
-            Int temp; 
+            Int temp;
             (*this).negative(temp);
             if(temp > d ){
                 sub(temp,d,rval);
@@ -964,7 +965,7 @@ class Int{
             }
         }
         else{
-            Int temp; 
+            Int temp;
             d.negative(temp);
             if(temp <= (*this) ){
                 sub((*this),temp,rval);
@@ -1041,7 +1042,7 @@ class Int{
         }
         ///s1 is -ve s2 is +ve
         else if ((s1)&&(!s2)){
-            Int temp; 
+            Int temp;
             (*this).negative(temp);
             if(temp > d ){
                 sub(temp,d,rval);
@@ -1057,7 +1058,7 @@ class Int{
             }
         }
         else{
-            Int temp; 
+            Int temp;
             d.negative(temp);
             if(temp <= (*this) ){
                 sub((*this),temp,rval);
@@ -1712,7 +1713,7 @@ class Int{
         }
         ///s1 is -ve s2 is +ve
         else if ((s1)&&(!s2)){
-            Int temp; 
+            Int temp;
             (*this).negative(temp);
             if(temp > d ){
                 sub(temp,d,rval);
@@ -1726,7 +1727,7 @@ class Int{
             }
         }
         else{
-            Int temp; 
+            Int temp;
             d.negative(temp);
             if(temp <= (*this) ){
                 sub((*this),temp,rval);
@@ -1808,7 +1809,7 @@ class Int{
         }
         ///s1 is -ve s2 is +ve
         else if ((s1)&&(!s2)){
-            Int temp; 
+            Int temp;
             (*this).negative(temp);
             if(temp > d ){
                 sub(temp,d,rval);
@@ -1824,7 +1825,7 @@ class Int{
             }
         }
         else{
-            Int temp; 
+            Int temp;
             d.negative(temp);
             if(temp <= (*this) ){
                 sub((*this),temp,rval);
