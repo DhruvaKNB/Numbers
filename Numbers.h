@@ -375,7 +375,7 @@ class Int{
         pair < bool , bool > rval;
         rval.first=0;
         rval.second=0;
-        if(t>(bits-1)){
+        if(t>(bits-1) || (t<0)){
             return rval;
         }
         rval.first=1;
